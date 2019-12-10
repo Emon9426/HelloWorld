@@ -1,0 +1,57 @@
+1. Angular CLI依赖环境
+    1.0 Angular CLI：
+        - Angular应用程序的初始化
+        - 内置的开发服务器
+        - 代码变更浏览器自动刷新
+        - 创建组件、指令、服务等集成工具
+        - 测试和维护
+        - ...
+    1-1 依赖环境的安装
+        1-1-1 Node.js
+            - 官网下载：https://nodejs.org
+            - npm环境会跟随Node.js一起被安装
+            - 确认：
+                node -v
+                npm -v
+        1-1-2 Python
+            - 官网下载：https://www.Python.org
+            - 安装时勾选"添加python to PATH"
+            - 确认：
+                python --version
+        1-1-3 安装C++编译工具
+            - 用管理员CMD执行：
+                npm install --global --production windows-build-tools
+            - 如果安装了visual studio或其他操作系统不需要安装
+            - 需要先安装python2.7 否则会报错
+        1-1-4 安装cnpm(淘宝镜像)
+            - npm i -g cnpm --registry=https://registry.npm.taobao.org
+            - 淘宝将npm在国内做的镜像
+
+2. 安装脚手架工具Angular CLI
+    2-1 安装Angular CLI
+        npm i -g @angular/cli
+        - 需要从网上获取，当网络不通时，使用cnpm
+        - 确认：
+            ng --version
+        - 如果安装失败，需要手动删除已经安装的angular/cli
+            npm unistall -g @angular/cli
+
+3. 使用脚手架初始化Angular
+    3-1 新建一个workspace
+    3-2 执行
+        ng new my-app
+        - 程序会新建目录 然后会使用npm下载包所需要的依赖
+        - 如果在网络不通的情况下：
+            - Ctrl+C 终端npm的安装过程
+            - cd my-app
+            - cnpm install
+    3-3 启动方式
+        - 进入到工程根目录
+            ng serve (ng start)
+        - 启动成功后
+            http://localhost:4200/webpack-dev-server/
+          查看初始化的结果
+        - 该命令会默认占用4200端口，如果需要修改可以通过
+            ng serve --port 3000
+          来指定端口
+        - REF 20191210
