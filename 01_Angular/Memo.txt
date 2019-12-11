@@ -55,3 +55,51 @@
             ng serve --port 3000
           来指定端口
         - REF 20191210
+
+4. Angular的默认目录
+    App-Name
+        |- e2e                      :端到端测试目录，做自动化测试
+        |- node_modules             :项目依赖包
+        |- src                      :应用的源代码目录
+        |   |- app                  :我们的代码放到这里面
+        |   |   |- App.component.ts     :组件
+        |   |   |- App.module.ts        :模块
+        |   |   *一个Angular工程至少有一个组件+一个模块
+        |   |- assets
+        |   |- environments
+        |   |- main.ts              :程序的入口
+        |   |- index.html           :程序的模板
+        |- Angular-cli.json         :angular命令行工具的配置文件
+        |- karma.conf.js            :kamar自动化测试的集成器的执行器
+        |- Package.json             :做angular开发用到的各个模块版本
+        |- Protractor.conf.js       :自动化测试执行的配置文件
+        |- tslint.json              :定义代码质量检查的规则
+        |- tsconfig.json            :typescript编译器的配置，已经按照angular项目标准已经配好了，大家不用动
+        |- ReadMe                   :angular命令行工具生成的标准说明
+    4-1 Angular的启动过程
+        - <Angular.json>  [编译依赖文件]
+            |           * root    会对应应用的根目录
+            |           * index   对应的程序启动时加载的页面(模板)
+            |           * main    对应程序启动时加载的脚本，负责引导程序启动
+            |- <main.ts>  [根据main属性指定的文件，找到main.ts]
+            |   |       * 引入enableProdMode模块：该模块为打开浏览器的开发者模式
+            |   |       * 引入platformBrowserDynamic模块：该模块的作用为启动当前应用
+            |   |       * 引入环境配置文件enviromnent：用于区分生产环节/开发环境
+            |   |       * 引入AppModule：应用的主模块，被bootstrapModule调用 → 根据这个属性找到app.module.ts
+            |   |- <app.module.ts> [程序的主模块]       
+            |   |   |   * 由@NgModule装饰器声明
+            |   |   |   * declarations属性：声明了这个模块有什么东西，只包括 组件、指令和管道
+            |   |   |   * imports属性     ：要让程序正常运转还需要什么东西
+            |   |   |       - BrowerModule是必须的，为了保证在浏览器中运行
+            |   |   |   * providers属性   ：声明模块中提供了什么服务，与依赖注入有关
+            |   |   |   * bootstrap属性   ：声明模块的主组件 → 根据这个属性找到AppComponent
+            |   |   |- <app.component.ts> [程序的主组件]
+            |   |   |   * 不使用router的情况
+            |   |   |       * app-root属性    ：定义了程序的跳转
+            |   |   |       * templateUrl属性 ：主模块要加载的页面，这个html页面会替代<Angular.json>中index指向的index.html中的<app-root></app-root>中间的部分
+            |   |   |       * styleUrls属性   ：定义了要加载的页面需要引用的css
+            |   |   |   * 使用router的情况
+            |   |   |       * 查看<app-routing.module.ts>中的配置
+            |   |   |       * {path: '', component: NewWorkspacesComponent, pathMatch: 'full'}
+            |   |   |          - path     :在浏览器中输入的地址，例如 path:'main' 对应http://localhost:4200/main
+            |   |   |          - component:所要跳转的组件，需要在import中声明
