@@ -75,6 +75,7 @@
         |- Protractor.conf.js       :自动化测试执行的配置文件
         |- tslint.json              :定义代码质量检查的规则
         |- tsconfig.json            :typescript编译器的配置，已经按照angular项目标准已经配好了，大家不用动
+        |- .editorconfig            :定义编辑器的风格，例如TAB键缩进几个空格
         |- ReadMe                   :angular命令行工具生成的标准说明
     4-1 Angular的启动过程
         - <Angular.json>  [编译依赖文件]
@@ -103,3 +104,29 @@
             |   |   |       * {path: '', component: NewWorkspacesComponent, pathMatch: 'full'}
             |   |   |          - path     :在浏览器中输入的地址，例如 path:'main' 对应http://localhost:4200/main
             |   |   |          - component:所要跳转的组件，需要在import中声明
+        
+        - <Angular.json>首先通过Angular.json找到程序的启动入口 <main.ts>，和启动页面<index.html>
+          |- <index.html> → 其中会有<app-root></app-root>作为程序输出的结果，最终会被根组件替换掉
+          |- <Main.ts>中指定了根模块<app.module.ts>
+            |- <app.module.ts> 根模块中指定了根组件<app.component.ts>
+                |- 根组件会渲染相关的页面，替换掉<index.html中的<app-root>
+
+5. 核心特性
+    5.1 组件(components)
+        - Angular中的一切都是围绕着组件
+        - 分治：把一些复杂的业务流程和功能拆分成一个一个小的组件中
+        - 复用：一些组件的功能可以通用，提高维护效率和开发效率
+        - app.component.ts
+            * 在NG中，组件就是一个class
+        - 创建组件
+            ng generate component <name>
+            --===output===-----------------------------------------------------------------------------------
+            |C:\WorkSpace\00_Git\01_Angular\00_Memo\my-app>ng generate component foo
+            |CREATE src/app/foo/foo.component.html (18 bytes)        → 生成的新的组件
+            |CREATE src/app/foo/foo.component.spec.ts (607 bytes)    → 生成的新的组件
+            |CREATE src/app/foo/foo.component.ts (257 bytes)         → 生成的新的组件
+            |CREATE src/app/foo/foo.component.css (0 bytes)          → 生成的新的组件
+            |UPDATE src/app/app.module.ts (463 bytes)                → 自动更新import部分和declaration部分
+            -------------------------------------------------------------------------------------------------
+            组件自动生成完毕后，可以在跟组件的模板(app.component.html)中添加组件定义的出口(foo.component.ts中的selector定义的标签)
+            即可在根组件的模板中看到新增的组件的模板内容
