@@ -130,3 +130,39 @@
             -------------------------------------------------------------------------------------------------
             组件自动生成完毕后，可以在跟组件的模板(app.component.html)中添加组件定义的出口(foo.component.ts中的selector定义的标签)
             即可在根组件的模板中看到新增的组件的模板内容
+    5.2 模块(Modules)
+        - 模块的作用，将组件、服务、路由打包模块中，从而形成一个积木块
+        - REF: app.module.ts
+    5.3 模板(Templates)
+        - 组件的模板，组件中的HTML文件
+        - 包括的功能：
+            数据绑定        → {{}}
+            双向数据绑定    → [(ngModel)]
+            条件渲染
+            循环渲染
+            指令
+            ...
+    5.4 元数据(metedata)
+        - 组件中的@component的部分
+        - 用于描述这个类相关的功能模块
+    5.5 数据绑定(Data binding)
+        - 通过数据驱动试图MVVM的思想，通过{{}}将数据绑定到DOM元素
+    5.6 指令(Directives)
+        - *ngFor        → 循环指令
+        - *ngIf         → 条件判断指令
+        - [(ngModel)]   → 数据双向绑定
+    5.7 服务(Services)
+        - 单独的类，对某个特定功能的封装
+        - 比较典型的 HTTP服务
+    5.8 依赖注入(Dependency injection)
+        - 使用指令的一些方式
+
+6. TypeScript
+    - http://www.typescriptlang.org
+    - https://www.tslang.cn/play/index.html
+    - 开发环境
+        npm i -g typescript
+        tsc --version
+    - 编译 将ts代码编译为js
+        tsc <文件名>
+    - 变量和对象的生命 → REF-TypeScript - 01.ts
