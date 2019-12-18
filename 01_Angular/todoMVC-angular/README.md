@@ -1,3 +1,4 @@
+
 # TodoMVCAngular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
@@ -45,4 +46,33 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
     ``` npm install package1 package2 ```
 - 安装成功后，在styles.css文件中 import 这个包
     ``` @import url('todomvc-common/base.css'); ```
-    
+
+### 在页面中循环展示数据列表
+- 语法
+    HTML ```*ngFor="let 变量名(任意名) of 数组名(在component中定义)"``` 循环数据列表
+    HTML ```<label>{{ todo.title }}</label>``` 调用数组元素
+    * 详细参照 app.component.html *
+
+### 条件渲染
+- 语法
+    HTML ```*ngIf="todos.length"```
+    结合ng-template
+    HTML ```<ng-template [ngIf]="todos.length"> ... </ng-template>```
+    * 详细参照 app.component.html *
+
+### 事件添加
+- 语法
+    HTML ```(事件)="component中定义的方法"```
+#### 键盘事件
+- 获取键盘上的按键
+    HTML ```<input class="new-todo" placeholder="What needs to be done?" autofocus (keyup)="addTodo($event)">```
+    TS   ```  addTodo(e): void{         ```
+         ```  console.log(e.keyCode);}  ```
+    或使用angular定义的事件
+    HTML ```<input class="new-todo" placeholder="What needs to be done?" autofocus (keyup.enter)="addTodo($event)">```
+- 在component.ts中通过事件参数获取HTML页中控件的值
+  * 详细参照 app.component.ts addTodo(e)
+
+### 分支判断
+- 语法
+    TS ``` 变量(是否存在) ? 如果存在 : 如果不存在 ```
