@@ -17,3 +17,12 @@
 ## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dct:type">work</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sindresorhus.com" property="cc:attributionName" rel="cc:attributionURL">TasteJS</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/deed.en_US">Creative Commons Attribution 4.0 International License</a>.
+
+
+## 说明笔记
+
+- 第一版模板下载下来后会发现没有样式定义，其样式定义的CSS在package.json中被指定
+- 下载依赖项
+``` cd C:\WorkSpace\00_Git\01_Angular\02_todomvc-app ```
+``` npm install ```
+- 安装完成后再次打开页面index.html，会发现样式已经生成
