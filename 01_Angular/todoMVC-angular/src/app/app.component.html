@@ -6,7 +6,7 @@
   <!-- This section should be hidden by default and shown when there are todos -->
   <ng-template [ngIf]="todos.length">                                <!--可以使用ng-template标签 在ng-template标签中 ngif要包在中括号中-->
   <section class="main">
-    <input id="toggle-all" class="toggle-all" type="checkbox">
+    <input id="toggle-all" class="toggle-all" type="checkbox" [checked]="toggleAll" (change)="toggleAll = $event.target.checked"> <!--[属性绑定] 内联执行-->
     <label for="toggle-all">Mark all as complete</label>
     <ul class="todo-list">
       <!-- These are here just to show the structure of the list items -->
@@ -14,9 +14,9 @@
       <!--li 是每一个任务项，每个任务项有3个状态，正常状态，完成状态，编辑状态-->
       <!---->
       <!--完成状态-->
-      <li *ngFor="let todo of todos">                                   <!--*ngFor="let 变量名(任意名) of 数组名(在component中定义)"-->
+      <li *ngFor="let todo of todos" [ngClass]="{'completed': todo.done}"> <!--*ngFor="let 变量名(任意名) of 数组名(在component中定义)" ngClass控制样式-->
         <div class="view">
-          <input class="toggle" type="checkbox" checked>
+          <input class="toggle" type="checkbox" [(ngModel)]="todo.done"> <!--数据的双向绑定-->
           <label>{{ todo.title }}</label>                               <!--在调用时为花括号 {{ 变量名(let中定义).数组元素}}-->
           <button class="destroy"></button>
         </div>

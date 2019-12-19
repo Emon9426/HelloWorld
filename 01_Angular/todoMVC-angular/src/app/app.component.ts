@@ -2,21 +2,21 @@
 import { Component } from '@angular/core';
 // 20191218-Feature1 数组定义- start
 const todos = [
-//  {
-//    id: 1,
-//    title: '吃饭1',
-//    done: true
-//  },
-//  {
-//    id: 2,
-//    title: '吃饭2',
-//    done: true
-//  },
-//  {
-//    id: 3,
-//    title: '吃饭3',
-//    done: true
-//  }
+  {
+    id: 1,
+    title: '吃饭1',
+    done: true
+  },
+  {
+    id: 2,
+    title: '吃饭2',
+    done: false
+  },
+  {
+    id: 3,
+    title: '吃饭3',
+    done: true
+  }
 ]; 
 // 20191218-Feature1 数组定义- end
 
@@ -53,5 +53,14 @@ export class AppComponent {
       }
     );
     e.target.value = '';
+  }
+
+  //get 和 set访问器 赋值器 进行属性的设定
+  get toggleAll() {
+    return this.todos.every(t => t.done); //寻找todos数组的done属性，每一个done都为true的时候，则为true，否则为false
+  }
+
+  set toggleAll(val) {
+    this.todos.forEach(t => t.done = val);
   }
 }

@@ -76,3 +76,22 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ### 分支判断
 - 语法
     TS ``` 变量(是否存在) ? 如果存在 : 如果不存在 ```
+
+### 数据的双向绑定
+- 语法
+    HTML ```<input class="toggle" type="checkbox" [(ngModel)]="todo.done">```
+- 使用前需在主模块中引入 FormsModule
+    app.module.ts ```import { FormsModule } from '@angular/forms';```
+    并在import中添加FormsModule
+    * 详细参照 app.module.ts
+
+### 样式处理
+- 语法
+    HTML ```<li *ngFor="let todo of todos" [ngClass]="{'completed': todo.done}">```
+
+### get set 方法
+- 语法
+    TS ```get toggleAll() {return this.todos.every(t => t.done);}```
+    TS ```set toggleAll(val) {this.todos.forEach(t => t.done = val);}```
+    HTML```<input id="toggle-all" class="toggle-all" type="checkbox" [checked]="toggleAll" (change)="toggleAll = $event.target.checked"> ```
+- 在HTML中，[checked]获取了组件中toggleAll属性，(change)事件对属性toggleAll赋值
