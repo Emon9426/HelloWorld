@@ -4,7 +4,7 @@
 * STS会自动生成文件结构 
 * 修改pom文件，添加依赖
     * 新建依赖如下：
-    、、、
+    ```
     <dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -22,7 +22,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 	</dependencies>
-    、、、
+    ```
     * 可以使用旧有项目的依赖，或使用自动生成器生成(自动生成应用时的网址)
 * 新建controller
     * 在/src/main/java中添加controller
