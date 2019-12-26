@@ -43,6 +43,15 @@
 * 添加Controller
     * 由于在 class SpringBoot02Application 中已经有Main方法，所以在controller中仅仅指定返回值即可
 
+# HTTP GET
+* 参照Class GetController
+    * 使用 restful协议，从路径中获取字段：
+        * REF: public Object findUser()
+    * 使用 GetMapping 注解
+        * REF: public Object pageUser
+    * 使用 GetMapping 注解 包含默认值或必填项
+        * public Object pageUser2
+
 # 常见问题
 ## 导入或新建项目工程后发现有报错
 * 右键工程选择maven-update project，让项目重新下载依赖即可
