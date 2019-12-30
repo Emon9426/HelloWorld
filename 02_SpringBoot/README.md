@@ -43,14 +43,11 @@
 * 添加Controller
     * 由于在 class SpringBoot02Application 中已经有Main方法，所以在controller中仅仅指定返回值即可
 
-# HTTP GET
+# HTTP 接口
 * 参照Class GetController
-    * 使用 restful协议，从路径中获取字段：
-        * REF: public Object findUser()
-    * 使用 GetMapping 注解
-        * REF: public Object pageUser
-    * 使用 GetMapping 注解 包含默认值或必填项
-        * public Object pageUser2
+    * 基本的HTTP接口中GET和POST方法
+* 参照Class OtherHttpController
+    * HTTP接口中GET POST DEL PUT请求
 
 # 常见问题
 ## 导入或新建项目工程后发现有报错
@@ -61,4 +58,4 @@
 * 首先找到占用8080端口的进程
     * `netstat -ano` 找端口8080的记录，记录下后面的PID
     * `tasklist | findstr "PID"` 找到PID对应的进程名(第一项 例如 javaw.exe)
-    * `taskkill /f /t /im 进程名` 杀进程
+    * `taskkill /f /t /im 进程名` 杀进程 `taskkill /f /t /im javaw.exe`
