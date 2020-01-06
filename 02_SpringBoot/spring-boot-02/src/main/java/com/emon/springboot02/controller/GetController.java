@@ -27,7 +27,7 @@ public class GetController {
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(path = "{city_id}/{user_id}",method = RequestMethod.GET)
+	@RequestMapping(path = "/v1/{city_id}/{user_id}",method = RequestMethod.GET)
 	public Object findUser(@PathVariable("city_id") String cityId,
 			@PathVariable("user_id") String userId) {
 		// 在参数声明(@PathVariable("city_id") String cityId,...)中
