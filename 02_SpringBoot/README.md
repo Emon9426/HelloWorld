@@ -86,10 +86,59 @@
     * 还可以将index.html放置于public resource static中，这些文件夹可以直接被读取静态资源，所以不再需要添加依赖和controller (spring.resources.static-locations中)
 * 静态资源配置文件
     * 复写application.propertites (在/src/main/resources路径下新建或修改)
-    * 在其中加入spring.resources.static-locations = classpath:/META-INF-resources/,classpath:/resources/,...在后面加上我们所指定的路径
+    * 在其中加入spring.resources.static-locations = classpath:/META-INF/resources/,classpath:/resources/,...在后面加上我们所指定的路径
 
 # 文件上传
 * REF /com/emon/springboot02/domain/FileController
+* 修改文件大小限制
+    * 设置代码
+    ```
+    @Bean
+	public MultipartConfigElement multipartConfig() {
+		MultipartConfigFactory factory = new MultipartConfigFactory();
+		// 单个文件的最大size
+		factory.setMaxFileSize("10240KB");
+		// 总上传数据总大小
+		factory.setMaxRequestSize("1024000KB");
+		
+		return factory.createMultipartConfig();
+	}
+    ```
+    * 需要将代码放置于有configuration注解的类中
+    * 在当前工程中，启动类带有@SpringBootApplication注解，其中包括了@SpringBootConfiguration和@EnableAutoConfiguration
+    * 所以可以放置于启动类中
+
+# 打jar包
+* 添加Maven依赖
+    ```
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                <plugin/>
+            <plugins/>
+        </build>
+    ```
+    * 不添加时报错: no main manifest attribute, in XXX.jar
+* 运行 Maven install
+    * 程序会被打包到 xxx\spring-boot-02\target 下
+    * 使用
+      ``` 
+
+# 热部署
+* 使用插件devtools进行热部署
+* 添加依赖
+    * 在pom文件中添加依赖
+    ```
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>sping-boot-devtools</artifactId>
+        <optional>true</optional>
+    </dependency>
+    ```
+    * 添加依赖后重启项目
+* TBC
 
 # 常见问题
 ## 导入或新建项目工程后发现有报错
