@@ -7,6 +7,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,9 +18,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.emon.springboot02.domain.JsonData;
 
 @Controller
+@PropertySource({"classpath:application.properties"})
 public class FileController {
 	
-	private static final String filePath = "C:\\WorkSpace\\00_Git\\02_SpringBoot\\spring-boot-02\\src\\main\\resources\\static\\"; //文件路径
+	//private static final String filePath = "C:\\WorkSpace\\00_Git\\02_SpringBoot\\spring-boot-02\\src\\main\\resources\\static\\"; //文件路径
+	@Value("${web.file.path}")
+	private String filePath; 
 	
 	@RequestMapping(value = "/v3/gopage")
 	public Object index() {
@@ -49,6 +54,10 @@ public class FileController {
 		//文件上传后的路径
 		filename = UUID.randomUUID() + suffixName; //随机数，由于文件名可能重复，所以不能作为为义标识
 		File dest = new File(filePath + filename);
+		
+		// debug
+		System.out.println(filePath+filename);
+		// debug
 		
 		//校验
 		//file.isEmpty(); //非空校验

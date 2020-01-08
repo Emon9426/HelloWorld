@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.emon.springboot02.domain.ServerSetting;
 import com.emon.springboot02.domain.User;
 
 @RestController
@@ -57,7 +59,8 @@ public class GetController {
 		params.clear();
 		params.put("from", from);
 		params.put("size", size);
-		
+		// 测试热部署
+		System.out.println("test1");
 		return params;
 	}
 	
@@ -124,6 +127,22 @@ public class GetController {
 		return params;
 	}
 
+	/**
+	 * 测试实体类的注入
+	 * 使用 @Autowired 进行注入
+	 */
+	@Autowired
+	private ServerSetting serversetting;
+	
+	@GetMapping("/v3/test_properties")
+	public Object testProperties() {
+		// 因为有@Restcontroller 会被自动转成json
+		return serversetting;
+	}
+	
+	
+	
+	
 /* Memo
 1.关于GET和POST
 	<相同点>

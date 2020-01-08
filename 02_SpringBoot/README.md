@@ -138,7 +138,59 @@
     </dependency>
     ```
     * 添加依赖后重启项目
-* TBC
+* 修改Controller后，会将class自动加载到jvm中。
+* 工程会自动重启，只会编译修改的文件。
+* 不会触发热部署重启的情况
+    * 静态资源不会被监听修改
+    * 在application.properties中配置：
+        * spring.devtools.restart.exclude=static/\*\*,public/\*\*,application.properties
+* 热部署重启开关
+    * 在resources中新建一个trigger.txt作为热部署文件开关
+    * 在application.properties中配置：
+        * spring.devtools.restart.trigger-file=trigger.txt
+    * 当trigger.txt被修改时，才会进行热部署，否则不会进行热部署
+
+# 配置文件
+* 常用的配置文件
+    * YAML: 采用树状结构，key后面需要为 冒号+空格
+        * 示例：
+        ```
+        application.yml
+        server: 
+            port: 8090
+            session-timeout: 30
+        ```
+    * Properites: 采用等号的方式
+        * 示例：
+        ```
+        application.properties
+        server.port=8080
+        server.session-timeout=30
+* 配置文件的加载顺序
+    * /config → 当前目录 → classpath /config package → classpath root
+    * 可以根据路径顺序对config文件进行复写
+* Springboot默认配置
+    * https://docs.spring.io/spring-boot/docs/2.x.x.xxx/reference/htmlsingle/#common-application-properties
+    * 不需要复制到配置文件中，只需要修改需要的属性即可
+* 注入配置文件 ref: FileController.java
+    * 在Controller上添加 @@PropertySource({"classpath:配置文件"})
+    * 在字段上使用 @value("${属性名}")
+* 实体类的配置
+    * 首先创建实体类 ref ServerSetting.java
+        * 实体类需要包括三个注解
+        ```
+        @Component
+        @PropertySource({"classpath:application.properties"})
+        @ConfigurationProperties或@ConfigurationProperties(prefix="test")
+        ```
+        * 使用@ConfigurationProperties时，属性类中属性值使用@value("${前缀.属性名}")的方式注入
+        * 使用@ConfigurationProperties(prefix="test")时，属性类中属性值使用@value("属性名")的方式注入
+    * 其次修改controller ref GetController.testProperties()
+        * 使用 @Autowired 进行注入
+    * Spring框架会从声明@ComponentScan所在的类的Package开始扫描，扫描同级目录和子目录
+        * @ComponentScan在Main方法所在的启动类中包含
+        * 所以要求启动类处于根目录包或和其他包同级的目录下
+
 
 # 常见问题
 ## 导入或新建项目工程后发现有报错
